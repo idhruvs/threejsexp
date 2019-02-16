@@ -26,7 +26,7 @@ var props = {
   },
   globeRadius: 800, // Radius of the globe (used for many calculations)
   dotsAmount: 30, // Amount of dots to generate and animate randomly across the lines
-  startingCountry: 'romania', // The key of the country to rotate the camera to during the introduction animation (and which country to start the cycle at)
+  startingCountry: 'sa', // The key of the country to rotate the camera to during the introduction animation (and which country to start the cycle at)
   colours: {
     // Cache the colours
     globeDots: '#0084f0', // No need to use the Three constructor as this value is used for the HTML canvas drawing 'fillStyle' property
@@ -261,54 +261,6 @@ const secondPoint = { x: 1320, y: 279 };
 let targetPoint = JSON.parse(JSON.stringify(firstPoint));
 function animate() {
   if (isHidden === false) {
-    // // resize();
-    // // groups.globe.rotation.y -= 0.005;
-
-    // // render();
-
-    // var progress = currentFrame / totalFrame;
-    // currentAzimuthal = camera.controls.getAzimuthalAngle();
-    // currentPolar = camera.controls.getPolarAngle();
-
-    // const angles = returnCameraAngles(targetPoint.x, targetPoint.y);
-    // targetAzimuthal = angles.azimuthal;
-    // targetPolar = angles.polar;
-
-    // const azimuthalDifference = currentAzimuthal - (currentAzimuthal - targetAzimuthal) * progress;
-    // camera.controls.setAzimuthalAngle(azimuthalDifference);
-
-    // camera.controls.setPolarAngle(1);
-
-    // if (currentFrame % 10 === 0) {
-    //   console.log(progress);
-
-    //   console.log(currentAzimuthal, targetAzimuthal, azimuthalDifference);
-    // }
-
-    // currentFrame++;
-
-    // if (currentFrame === totalFrame) {
-    //   let newTargetPoint;
-    //   currentFrame = 0;
-    //   console.log('---start----');
-    //   if (targetPoint.x === firstPoint.x) {
-    //     console.log('here', targetPoint.x, firstPoint.x);
-    //     newTargetPoint = JSON.parse(JSON.stringify(secondPoint));
-    //     console.log(currentFrame, totalFrame, targetPoint.x);
-    //   }
-
-    //   if (targetPoint.x === secondPoint.x) {
-    //     console.log('now here', targetPoint.x, secondPoint.x);
-    //     newTargetPoint = JSON.parse(JSON.stringify(firstPoint));
-    //     console.log(currentFrame, totalFrame, targetPoint.x);
-    //   }
-
-    //   targetPoint = newTargetPoint;
-
-    //   targetPoint = { x: targetPoint.x + 200, y: targetPoint.y };
-    //   console.log('---end----');
-    // }
-
     requestAnimationFrame(animate);
   }
 
@@ -321,7 +273,7 @@ function animate() {
   }
 
   if (animations.countries.animating === true) {
-      animateCountryCycle();
+    animateCountryCycle();
   }
 
   positionElements();
@@ -399,6 +351,8 @@ function addGlobeDots() {
 
   var material = new THREE.PointsMaterial({
     map: texture,
+    transparent: false,
+    opacity: 0,
     size: props.globeRadius / 120
   });
 
@@ -429,14 +383,32 @@ function addGlobeDots() {
 
 /* COUNTRY LINES AND DOTS */
 
+function addRandomInterconnectedLines(){
+  var geometry = new THREE.Geometry();
+  var group = new THREE.Group();
+  group.name = data.countries['romania-connected-point-1'];
+  for (var countryStart in data.countries) {
+    for ( var countryEnd in data.countries) {
+      if(countryStart === 'romania-connected-point-2' && countryEnd === 'romania-connected-point-8'){
+        addLinesToMesh(
+          group,
+          geometry,
+          countryStart,
+          countryEnd
+        );
+      }
+    }
+  }
+  
+}
+
 function addLines() {
   // Create the geometry
   var geometry = new THREE.Geometry();
-
+  // addRandomInterconnectedLines();
   for (var countryStart in data.countries) {
     var group = new THREE.Group();
     group.name = countryStart;
-
     for (var countryEnd in data.countries) {
       // Skip if the country is the same
       if (
@@ -448,45 +420,50 @@ function addLines() {
       }
 
       // Get the spatial coordinates
-      var result = returnCurveCoordinates(
-        data.countries[countryStart].x,
-        data.countries[countryStart].y,
-        data.countries[countryEnd].x,
-        data.countries[countryEnd].y
-      );
-
-      // Calcualte the curve in order to get points from
-      var curve = new THREE.QuadraticBezierCurve3(
-        new THREE.Vector3(result.start.x, result.start.y, result.start.z),
-        new THREE.Vector3(result.mid.x, result.mid.y, result.mid.z),
-        new THREE.Vector3(result.end.x, result.end.y, result.end.z)
-      );
-
-      // Get verticies from curve
-      geometry.vertices = curve.getPoints(200);
-
-      // Create mesh line using plugin and set its geometry
-      var line = new MeshLine();
-      line.setGeometry(geometry);
-
-      // Create the mesh line material using the plugin
-      var material = new MeshLineMaterial({
-        color: props.colours.lines,
-        transparent: false,
-        opacity: 0
-      });
-
-      // Create the final object to add to the scene
-      var curveObject = new THREE.Mesh(line.geometry, material);
-      curveObject._path = geometry.vertices;
-
-      group.add(curveObject);
+      addLinesToMesh(group, geometry, countryStart, countryEnd);
     }
 
     group.visible = false;
 
     groups.lines.add(group);
   }
+}
+
+function addLinesToMesh(group, geometry, countryStart, countryEnd) {
+    var result = returnCurveCoordinates(
+      data.countries[countryStart].x,
+      data.countries[countryStart].y,
+      data.countries[countryEnd].x,
+      data.countries[countryEnd].y
+    );
+
+    // Calcualte the curve in order to get points from
+    var curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(result.start.x, result.start.y, result.start.z),
+      new THREE.Vector3(result.mid.x, result.mid.y, result.mid.z),
+      new THREE.Vector3(result.end.x, result.end.y, result.end.z)
+    );
+
+    // Get verticies from curve
+    geometry.vertices = curve.getPoints(200);
+
+    // Create mesh line using plugin and set its geometry
+    var line = new MeshLine();
+    line.setGeometry(geometry);
+
+    // Create the mesh line material using the plugin
+    var material = new MeshLineMaterial({
+      color: props.colours.lines,
+      transparent: false,
+      opacity: 1
+    });
+
+    // Create the final object to add to the scene
+    var curveObject = new THREE.Mesh(line.geometry, material);
+    curveObject._path = geometry.vertices;
+
+    group.add(curveObject);
+  
 }
 
 function addLineDots() {
@@ -602,7 +579,6 @@ function createListElements() {
       position: coordinates,
       element: element
     };
-
     // Add the element to the DOM and add the object to the array
     list.appendChild(element);
     elements[target] = object;
@@ -615,9 +591,10 @@ function createListElements() {
     if (country.includes(`connected-point`)) {
       continue;
     }
-    console.log(country);
+    // console.log(country);
 
     var group = groups.lines.getObjectByName(country);
+
     var coordinates = group.children[0]._path[0];
     pushObject(coordinates, country);
 
@@ -782,7 +759,7 @@ function introAnimate() {
     animations.finishedIntro = true;
     // Start country cycle
     showNextCountry();
-    animations.countries.timeout = setTimeout(showNextCountry, 0);
+    animations.countries.timeout = setTimeout(showNextCountry, 10000);
     addLineDots();
   }
 }
@@ -839,19 +816,19 @@ function animateCountryCycle() {
       (camera.angles.current.polar - camera.angles.target.polar) * progress;
     polarDifference = camera.angles.current.polar - polarDifference;
     camera.controls.setPolarAngle(1);
-
+    
     animations.countries.current++;
   } else {
     animations.countries.animating = false;
     animations.countries.current = 0;
     animations.countries.timeout = setTimeout(() => {
       showNextCountry();
-    }, 1200);
+    }, 0);
   }
 }
 
 function showNextCountry() {
-  console.log(animations.countries.index);
+  // console.log(animations.countries.index);
   if (animations.countries.index >= Object.keys(data.countries).length) {
     animations.countries.index = 0;
   }
@@ -880,13 +857,12 @@ function showNextCountry() {
     countryToChange.includes('connected-point') ||
     countryToChange.includes('dummy')
   ) {
-    changeCountry('romania', false);
+    changeCountry('sa', false);
     console.log('in show next country, new country found', 'india');
   } else {
     changeCountry(countryToChange, false);
     console.log('in show next country, new country found', countryToChange);
   }
-  // changeCountry(countryToChange, )
 }
 
 /* COORDINATE CALCULATIONS */

@@ -6361,15 +6361,23 @@
     { "x": 1450, "y": 439 }
   ],
   "countries": {
-    "romania": { "x": 331, "y": 210, "name": "Romania", "country": "Romania" },
+    "sa": { "x": 100, "y": 378, "name": "Sa", "country": "sa" },
+
+    "sa-connected-point-1": { "x": 80, "y": 370, "name": "Saudi", "country": "sa" },
+    "sa-connected-point-2": { "x": 150, "y": 378, "name": "SA", "country": "sa" },
+    
+    "dummy-visible-point-14x": { "x": 80, "y": 378, "name": "Saudi", "country": "sa" },
+    "dummy-visible-point-15x": { "x": 150, "y": 378, "name": "SA", "country": "sa" }, 
+
+    "romania": { "x": 331, "y": 340, "name": "Romania", "country": "Romania" },
 
     "romania-connected-point-1": { "x": 300, "y": 380, "name": "Saudi", "country": "Romania" },
     "romania-connected-point-2": { "x": 561, "y": 100, "name": "SA", "country": "Romania" },
     "romania-connected-point-3": { "x": 250, "y": 280, "name": "RomaniaLeft", "country": "Romania" },
     "romania-connected-point-4": {"x": 370, "y": 410, "name": "Saudi2", "country": "Romania" },
-    "romania-connected-point-5": {"x": 370, "y": 410, "name": "Saudi2", "country": "Romania" },
+    "romania-connected-point-5": {"x": 370, "y": 410, "name": "Saudi5", "country": "Romania" },
     "romania-connected-point-6": { "x": 250, "y": 371, "name": "Saudi3", "country": "Romania" },
-    "romania-connected-point-7": { "x": 210, "y": 410, "name": "SA", "country": "Romania" },
+    "romania-connected-point-7": { "x": 210, "y": 410, "name": "SA4", "country": "Romania" },
     "romania-connected-point-8": { "x": 300, "y": 380, "name": "Romania2", "country": "Romania" },
     "romania-connected-point-9": { "x": 270, "y": 580, "name": "Romania3", "country": "Romania" },
     "romania-connected-point-10": { "x": 107, "y": 180, "name": "Romania4", "country": "Romania" },
@@ -6384,9 +6392,9 @@
     "dummy-visible-point-15": { "x": 300, "y": 380, "name": "SA", "country": "Romania" },
     "dummy-visible-point-16": { "x": 250, "y": 280, "name": "RomaniaLeft", "country": "Romania" },
     "dummy-visible-point-17": { "x": 370, "y": 410, "name": "Saudi2", "country": "Romania" },
-    "dummy-visible-point-18": { "x": 320, "y": 410, "name": "Saudi3", "country": "Romania" },
+    "dummy-visible-point-18": { "x": 320, "y": 410, "name": "Saudi5", "country": "Romania" },
     "dummy-visible-point-19": { "x": 250, "y": 371, "name": "Saudi3", "country": "Romania" },
-    "dummy-visible-point-20": { "x": 210, "y": 410, "name": "SA", "country": "Romania" },
+    "dummy-visible-point-20": { "x": 210, "y": 410, "name": "SA4", "country": "Romania" },
     "dummy-visible-point-21": {  "x": 300, "y": 380, "name": "Romania2", "country": "Romania" },
     "dummy-visible-point-22": {  "x": 270, "y": 580, "name": "Romania3", "country": "Romania" },
     "dummy-visible-point-23": { "x": 107, "y": 180, "name": "Romania4", "country": "Romania" },
@@ -6423,7 +6431,6 @@
     "dummy-visible-point-11": { "x": 690, "y": 270, "name": "China2", "country": "India" },
     "dummy-visible-point-12": { "x": 720, "y": 320, "name": "China3", "country": "India" },
     "dummy-visible-point-13": { "x": 531, "y": 310, "name": "India2", "country": "India" },
-    
    
 
     "mexico": { "x": 1321, "y": 378, "name": "Mexico", "country": "Mexico" },
@@ -6444,7 +6451,43 @@
     "dummy-visible-point-32": { "x": 1461, "y": 578, "name": "Country5", "country": "Mexico" },
     "dummy-visible-point-33": { "x": 1571, "y": 583, "name": "Country6", "country": "Mexico" },
     "dummy-visible-point-34": { "x": 1461, "y": 162, "name": "Country7", "country": "Mexico" },
-    "dummy-visible-point-35": { "x": 1401, "y": 211, "name": "Country8", "country": "Mexico" }
+    "dummy-visible-point-35": { "x": 1401, "y": 211, "name": "Country8", "country": "Mexico" },
+
+    "us": { "x": 1321, "y": 378, "name": "US", "country": "US" },
+
+    "us-connected-point-1": { "x": 1321, "y": 178, "name": "Country1", "country": "US" },
+    "us-connected-point-2": { "x": 1241, "y": 188, "name": "Country2", "country": "US" },
+    "us-connected-point-3": { "x": 1461, "y": 162, "name": "Country3", "country": "US" },
+    "us-connected-point-4": { "x": 1101, "y": 211, "name": "Country4", "country": "US" },
+    "us-connected-point-5": { "x": 1461, "y": 578, "name": "Country5", "country": "US" },
+    "us-connected-point-6": { "x": 1571, "y": 583, "name": "Country6", "country": "US" },
+    "us-connected-point-7": { "x": 1461, "y": 162, "name": "Country7", "country": "US" },
+    "us-connected-point-8": { "x": 1401, "y": 211, "name": "Country8", "country": "US" },
+
+    "dummy-visible-point-28a": { "x": 1321, "y": 178, "name": "Country1", "country": "US" },
+    "dummy-visible-point-29a": { "x": 1241, "y": 188, "name": "Country2", "country": "US" },
+    "dummy-visible-point-30a": { "x": 1461, "y": 162, "name": "Country3", "country": "US" },
+    "dummy-visible-point-31a": { "x": 1101, "y": 211, "name": "Country4", "country": "US" },
+    "dummy-visible-point-32a": { "x": 1461, "y": 578, "name": "Country5", "country": "US" },
+    "dummy-visible-point-33a": { "x": 1571, "y": 583, "name": "Country6", "country": "US" },
+    "dummy-visible-point-34a": { "x": 1461, "y": 162, "name": "Country7", "country": "US" },
+    "dummy-visible-point-35a": { "x": 1401, "y": 211, "name": "Country8", "country": "US" },
+
+    "sea": { "x": 1451, "y": 378, "name": "Sea", "country": "sea" },
+
+    "sea-connected-point-1": { "x": 1380, "y": 370, "name": "Saudi", "country": "sea" },
+    "sea-connected-point-2": { "x": 1470, "y": 378, "name": "SA", "country": "sea" },
     
+    "dummy-visible-point-14xx": { "x": 1380, "y": 378, "name": "Saudi", "country": "sea" },
+    "dummy-visible-point-15xx": { "x": 1470, "y": 378, "name": "SA", "country": "sea" },
+
+    "sea1": { "x": 1700, "y": 378, "name": "Sea", "country": "sea" },
+
+    "sea1-connected-point-1": { "x": 1780, "y": 370, "name": "Saudi", "country": "sea1" },
+    "sea1-connected-point-2": { "x": 1670, "y": 378, "name": "SA", "country": "sea1" },
+    
+    "dummy-visible-point-14xxx": { "x": 1780, "y": 378, "name": "Saudi", "country": "sea1" },
+    "dummy-visible-point-15xxx": { "x": 1670, "y": 378, "name": "SA", "country": "sea1" }
+
   }
 }
