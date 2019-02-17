@@ -273,7 +273,8 @@ function animate() {
   }
 
   if (animations.countries.animating === true) {
-    animateCountryCycle();
+    // animateCountryCycle();
+    groups.globe.rotation.y += 0.005;
   }
 
   positionElements();
@@ -330,6 +331,18 @@ function addGlobe() {
   addGlobeDots();
 }
 
+function addDot(geometry, targetX, targetY) {
+  // Add a point with zero coordinates
+  var point = new THREE.Vector3(0, 0, 0);
+  geometry.vertices.push(point);
+
+  // Add the coordinates to a new array for the intro animation
+  var result = returnSphericalCoordinates(targetX, targetY);
+  animations.dots.points.push(
+    new THREE.Vector3(result.x, result.y, result.z)
+  );
+};
+
 function addGlobeDots() {
   var geometry = new THREE.Geometry();
 
@@ -356,24 +369,12 @@ function addGlobeDots() {
     size: props.globeRadius / 120
   });
 
-  var addDot = function(targetX, targetY) {
-    // Add a point with zero coordinates
-    var point = new THREE.Vector3(0, 0, 0);
-    geometry.vertices.push(point);
-
-    // Add the coordinates to a new array for the intro animation
-    var result = returnSphericalCoordinates(targetX, targetY);
-    animations.dots.points.push(
-      new THREE.Vector3(result.x, result.y, result.z)
-    );
-  };
-
   for (var i = 0; i < data.points.length; i++) {
-    addDot(data.points[i].x, data.points[i].y);
+    addDot(geometry, data.points[i].x, data.points[i].y);
   }
 
   for (var country in data.countries) {
-    addDot(data.countries[country].x, data.countries[country].y);
+    addDot(geometry, data.countries[country].x, data.countries[country].y);    
   }
 
   // Add the points to the scene
@@ -427,6 +428,7 @@ function addLines() {
 
     groups.lines.add(group);
   }
+  groups.globe.add(groups.lines);
 }
 
 function addLinesToMesh(group, geometry, countryStart, countryEnd) {
@@ -500,6 +502,7 @@ function addLineDots() {
     // Add the dot to the dots group
     groups.lineDots.add(targetDot);
   }
+  groups.globe.add(groups.lineDots);
 }
 
 function assignDotsToRandomLine(target) {
@@ -568,7 +571,9 @@ function createListElements() {
 
   var pushObject = function(coordinates, target) {
     // Create the element
-    var element = document.createElement('li');
+    // creating 'span' element as the css is assigned with li element
+    // to see the blinking icons remove 'span' from next line and replace it with 'li'
+    var element = document.createElement('span');
 
     var innerContent;
     var targetCountry = data.countries[target];
@@ -782,6 +787,7 @@ function changeCountry(key, init) {
   // Show the select country lines
   animations.countries.selected = groups.lines.getObjectByName(key);
   animations.countries.selected.visible = true;
+  console.log(animations.countries);
 
   if (init !== true) {
     camera.angles.current.azimuthal = camera.controls.getAzimuthalAngle();

@@ -37,6 +37,10 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8D07C8', endColorstr='${colourEnd}', GradientType=1);
 }
 
+.hidden-countries{
+  opacity: hidden;
+}
+
 /* GLOBE */
 .globe {
   position: relative;
@@ -53,7 +57,7 @@ body {
 }
 
 .globe .globe-list {
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: opacity 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -moz-transition: opacity 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -ms-transition: opacity 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -92,7 +96,7 @@ body {
 /* Country dots */
 .globe .globe-list > li:before {
   content: "";
-  opacity: 0.5;
+  opacity: 0;
   pointer-events: none;
   position: absolute;
   left: 50%;
@@ -205,7 +209,7 @@ body {
 }
 
 .globe .globe-list > li.active .text {
-  opacity: 1;
+  opacity: 0;
   right: 29px;
   font-size: 20px;
   line-height: 20px;
@@ -214,6 +218,7 @@ body {
 
 .globe .globe-canvas {
   z-index: 0;
+  opacity: 1;
   position: absolute;
   left: 0;
   top: 0;
