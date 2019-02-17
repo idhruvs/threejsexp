@@ -14,7 +14,8 @@ var groups = {
   globe: null, // A group containing the globe sphere (and globe dots)
   globeDots: null, // A group containing the globe dots
   lines: null, // A group containing the lines between each country
-  lineDots: null // A group containing the line dots
+  lineDots: null, // A group containing the line dots
+  countryDots: null
 };
 
 // Map properties for creation and rendering
@@ -25,14 +26,14 @@ var props = {
     height: 1024 / 2
   },
   globeRadius: 800, // Radius of the globe (used for many calculations)
-  dotsAmount: 30, // Amount of dots to generate and animate randomly across the lines
+  dotsAmount: 300, // Amount of dots to generate and animate randomly across the lines
   startingCountry: 'sa', // The key of the country to rotate the camera to during the introduction animation (and which country to start the cycle at)
   colours: {
     // Cache the colours
-    globeDots: '#ffffff', // No need to use the Three constructor as this value is used for the HTML canvas drawing 'fillStyle' property
+    globeDots: '#0084f0', // No need to use the Three constructor as this value is used for the HTML canvas drawing 'fillStyle' property
     lines: new THREE.Color('#ffffff'),
     lineDots: new THREE.Color('#ffffff'),
-    countryDots: '#ff0000'
+    countryDots: 'ff0000',
   },
   alphas: {
     // Transparent values of materials
@@ -329,7 +330,9 @@ function addGlobe() {
   groups.globe.add(globe);
   groups.main.add(groups.globe);
 
+  // addCountryDots();
   addGlobeDots();
+  
 }
 
 function addDot(geometry, targetX, targetY) {
@@ -343,6 +346,33 @@ function addDot(geometry, targetX, targetY) {
     new THREE.Vector3(result.x, result.y, result.z)
   );
 };
+
+function addCountryDots(canvasContext, textureCanvas) {
+  var geometry = new THREE.Geometry();
+
+  // Make circle
+  canvasContext.fillStyle = 'rgb(255,0,0)'
+  canvasContext.fill();
+
+  // Make texture
+  var texture = new THREE.Texture(textureCanvas);
+  texture.needsUpdate = true;
+
+  var material = new THREE.PointsMaterial({
+    map: texture,
+    transparent: false,
+    opacity: 0,
+    size: props.globeRadius / 120
+  });
+
+  for (var country in data.countries) {
+    addDot(geometry, data.countries[country].x, data.countries[country].y);    
+  }
+
+  // Add the points to the scene
+  groups.countryDots = new THREE.Points(geometry, material);
+  groups.globe.add(groups.countryDots);
+}
 
 function addGlobeDots() {
   var geometry = new THREE.Geometry();
@@ -381,6 +411,7 @@ function addGlobeDots() {
   // Add the points to the scene
   groups.globeDots = new THREE.Points(geometry, material);
   groups.globe.add(groups.globeDots);
+  // addCountryDots(canvasContext, textureCanvas);
 }
 
 /* COUNTRY LINES AND DOTS */
