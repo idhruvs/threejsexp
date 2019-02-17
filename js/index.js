@@ -27,7 +27,7 @@ var props = {
   },
   globeRadius: 800, // Radius of the globe (used for many calculations)
   dotsAmount: 300, // Amount of dots to generate and animate randomly across the lines
-  startingCountry: 'sa', // The key of the country to rotate the camera to during the introduction animation (and which country to start the cycle at)
+  startingCountry: 'mexico', // The key of the country to rotate the camera to during the introduction animation (and which country to start the cycle at)
   colours: {
     // Cache the colours
     globeDots: '#0084f0', // No need to use the Three constructor as this value is used for the HTML canvas drawing 'fillStyle' property
@@ -80,7 +80,7 @@ var animations = {
     index: null, // Index of the country in the data array
     timeout: null, // Timeout object for cycling to the next country
     initialDuration: 0, // Initial timeout duration before starting the country cycle
-    duration: 1000, // Timeout duration between cycling to the next country
+    duration: 500, // Timeout duration between cycling to the next country
     isAnimating: false
   }
 };
@@ -276,7 +276,7 @@ function animate() {
 
   if (animations.countries.animating === true) {
     // animateCountryCycle();
-    groups.globe.rotation.y += 0.005;
+    groups.globe.rotation.y += 0.007;
   }
 
   positionElements();
@@ -796,7 +796,7 @@ function introAnimate() {
     animations.finishedIntro = true;
     // Start country cycle
     showNextCountry();
-    animations.countries.timeout = setTimeout(showNextCountry, 10000);
+    animations.countries.timeout = setTimeout(showNextCountry, 2000);
     addLineDots();
   }
 }
@@ -818,17 +818,51 @@ function changeCountry(key, init) {
 
   // Show the select country lines
   animations.countries.selected = groups.lines.getObjectByName(key);
+ if(animations.countries.selected.name === 'mexico'){
+  setTimeout( () => {
+    groups.lines.getObjectByName('romania').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 0)
 
+  setTimeout( () => {
+    groups.lines.getObjectByName('romania-jump').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 0)
+
+  setTimeout( () => {
+    groups.lines.getObjectByName('romania-jump1').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 0)
   
-  groups.lines.getObjectByName('mexico').children.forEach(child => {
-    animations.countries.selected.children.push(child);
-  })
-  
+  setTimeout( () => {
+    groups.lines.getObjectByName('sa').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 0)
+
+  setTimeout( () => {
+    groups.lines.getObjectByName('sea-jump1').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 0)
+
+
+  setTimeout( () => {
+    groups.lines.getObjectByName('mexico').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 0)
   setTimeout( () => {
     groups.lines.getObjectByName('india').children.forEach(child => {
       animations.countries.selected.children.push(child);
     })
-  }, 2000)
+  }, 0)
+ }
+  
+  
   
   animations.countries.selected.visible = true;
   
@@ -909,7 +943,7 @@ function showNextCountry() {
     countryToChange.includes('connected-point') ||
     countryToChange.includes('dummy')
   ) {
-    changeCountry('sa', false);
+    changeCountry('mexico', false);
     console.log('in show next country, new country found', 'india');
   } else {
     changeCountry(countryToChange, false);

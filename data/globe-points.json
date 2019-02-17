@@ -6365,9 +6365,21 @@
 
     "sa-connected-point-1": { "x": 80, "y": 370, "name": "Saudi", "country": "sa" },
     "sa-connected-point-2": { "x": 150, "y": 378, "name": "SA", "country": "sa" },
-    
+    "sa-connected-point-3": { "x": 1700, "y": 378, "name": "SA", "country": "sa" },
+
     "dummy-visible-point-14x": { "x": 80, "y": 378, "name": "Saudi", "country": "sa" },
     "dummy-visible-point-15x": { "x": 150, "y": 378, "name": "SA", "country": "sa" }, 
+    "dummy-visible-point-1ax": { "x": 1700, "y": 378, "name": "SA", "country": "sa" },
+
+    "romania-jump": { "x": 107, "y": 180, "name": "RomaniaJump", "country": "RomaniaJump" },
+
+    "romania-jump-connected-point-1": { "x": 1700, "y": 378, "name": "Saudi", "country": "sa" },
+
+    "romania-jump1": { "x": 107, "y": 450, "name": "RomaniaJump1", "country": "RomaniaJump1" },
+    "romania-jump1-connected-point-1": { "x": 1700, "y": 378, "name": "Saudi", "country": "RomaniaJump1" },
+
+    "sea-jump1": { "x": 1700, "y": 378, "name": "RomaniaJump1", "country": "RomaniaJump1" },
+    "sea-jump1-connected-point-1": { "x": 1300, "y": 270, "name": "Saudi", "country": "RomaniaJump1" },
 
     "romania": { "x": 331, "y": 340, "name": "Romania", "country": "Romania" },
 
@@ -6419,6 +6431,7 @@
     "india-connected-point-12": { "x": 720, "y": 320, "name": "China3", "country": "India" },
     "india-connected-point-13": { "x": 531, "y": 310, "name": "India2", "country": "India" },
 
+
     "dummy-visible-point-1": { "x": 590, "y": 200, "name": "Mongolia", "country": "India" },
     "dummy-visible-point-2": { "x": 511, "y": 250, "name": "Kazhakistan", "country": "India" },
     "dummy-visible-point-4": { "x": 430, "y": 330, "name": "Saudi", "country": "India" },
@@ -6431,7 +6444,6 @@
     "dummy-visible-point-11": { "x": 690, "y": 270, "name": "China2", "country": "India" },
     "dummy-visible-point-12": { "x": 720, "y": 320, "name": "China3", "country": "India" },
     "dummy-visible-point-13": { "x": 531, "y": 310, "name": "India2", "country": "India" },
-   
 
     "mexico": { "x": 1321, "y": 378, "name": "Mexico", "country": "Mexico" },
 
@@ -6453,7 +6465,7 @@
     "mexico-connected-point-1118": { "x":1534, "y":120,"name":"Country1",",country":"mexico"},
     "mexico-connected-point-1119": { "x":1458, "y":414,"name":"Country1",",country":"mexico"},
     "mexico-connected-point-1120": { "x":1257, "y":254,"name":"Country1",",country":"mexico"},
-
+    "mexico-connected-point-1121": { "x": 1700, "y": 378, "name": "SA", "country": "mexico" },
 
     "dummy-visible-point-28": { "x": 1321, "y": 178, "name": "Country1", "country": "Mexico" },
     "dummy-visible-point-29": { "x": 1241, "y": 188, "name": "Country2", "country": "Mexico" },
@@ -6473,6 +6485,7 @@
     "dummy-visible-point-1118": { "x":1534, "y":120,"name":"Country1","country":"mexico"},
     "dummy-visible-point-1119": { "x":1458, "y":414,"name":"Country1","country":"mexico"},
     "dummy-visible-point-1120": { "x":1257, "y":254,"name":"Country1","country":"mexico"},
+    "dummy-visible-point-1121": { "x": 1700, "y": 378, "name": "SA", "country": "mexico" },
 
     "us": { "x": 1321, "y": 378, "name": "US", "country": "US" },
 
