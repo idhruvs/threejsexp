@@ -29,9 +29,10 @@ var props = {
   startingCountry: 'sa', // The key of the country to rotate the camera to during the introduction animation (and which country to start the cycle at)
   colours: {
     // Cache the colours
-    globeDots: '#0084f0', // No need to use the Three constructor as this value is used for the HTML canvas drawing 'fillStyle' property
+    globeDots: '#ffffff', // No need to use the Three constructor as this value is used for the HTML canvas drawing 'fillStyle' property
     lines: new THREE.Color('#ffffff'),
-    lineDots: new THREE.Color('#ffffff')
+    lineDots: new THREE.Color('#ffffff'),
+    countryDots: '#ff0000'
   },
   alphas: {
     // Transparent values of materials
@@ -786,8 +787,22 @@ function changeCountry(key, init) {
 
   // Show the select country lines
   animations.countries.selected = groups.lines.getObjectByName(key);
+
+  
+  groups.lines.getObjectByName('mexico').children.forEach(child => {
+    animations.countries.selected.children.push(child);
+  })
+  
+  setTimeout( () => {
+    groups.lines.getObjectByName('india').children.forEach(child => {
+      animations.countries.selected.children.push(child);
+    })
+  }, 2000)
+  
   animations.countries.selected.visible = true;
-  console.log(animations.countries);
+  
+
+  
 
   if (init !== true) {
     camera.angles.current.azimuthal = camera.controls.getAzimuthalAngle();
